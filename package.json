@@ -15,9 +15,10 @@
   "dependencies": {
     "ant-design-vue": "^2.2.8",
     "axios": "^0.24.0",
+    "deepmerge": "^4.2.2",
+    "pinia": "^2.0.4",
     "vue": "^3.2.16",
-    "vue-router": "^4.0.12",
-    "vuex": "^4.0.2"
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@cypress/vite-dev-server": "^2.2.1",

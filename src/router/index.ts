@@ -1,13 +1,28 @@
+import type { App } from 'vue'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import config from '@/config'
 import asyncRouters from './async/config.async'
 import routers from './config'
+import { useSettingStore } from '@/store/modules/setting'
 
 function getRouters(async: boolean): RouteRecordRaw[] {
   return async ? asyncRouters : routers
 }
 
-export default createRouter({
+const router = createRouter({
   history: createWebHistory(),
-  routes: getRouters(config.asyncRouter)
+  routes: []
 })
+
+export function setupRouter(app: App) {
+  app.use(router)
+
+  // TODO 后续这里抽取成一个方法
+  const setting = useSettingStore()
+  const routes = getRouters(setting.asyncRouter)
+  routes.forEach((route) => {
+    router.addRoute(route)
+  })
+  router.push('/')
+}
+
+export { router }
