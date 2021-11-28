@@ -1,12 +1,22 @@
 <script setup lang="ts">
   import { reactive } from 'vue'
+  import { fetchLoginApi } from '@/services'
+  import { useRouter } from 'vue-router'
 
   const user = reactive({
     account: '',
     password: ''
   })
 
-  function onLogin() {}
+  function onLogin() {
+    fetchLoginApi(user).then(afterLogin)
+  }
+
+  const router = useRouter()
+
+  function afterLogin() {
+    router.push('/')
+  }
 </script>
 
 <template>

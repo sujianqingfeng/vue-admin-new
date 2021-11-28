@@ -20,5 +20,16 @@ export default defineConfig({
       dts: true,
       resolvers: [AntDesignVueResolver()]
     })
-  ]
+  ],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:4523/mock/479984',
+        changeOrigin: true,
+        rewrite: (path) => {
+          return path.replace(/^\/api/, '')
+        }
+      }
+    }
+  }
 })

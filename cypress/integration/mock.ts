@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 
 describe('Mock Api', () => {
-  beforeEach(() => {})
-
   it('login', () => {
+    cy.intercept('/api/login', { fixture: 'login.json' })
+
     cy.visit('/login')
   })
 })

@@ -1,9 +1,10 @@
-type Config = {
-  asyncRouter: boolean
-}
+import _config from './config'
+import defaultConfig from './default'
 
-const config: Config = {
-  asyncRouter: false
+// TODO 后续可能需要deepMerge
+const config = {
+  ...defaultConfig,
+  ..._config
 }
 
 export default config
