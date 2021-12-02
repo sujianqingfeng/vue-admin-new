@@ -1,15 +1,7 @@
-type Theme = {
-  mode: 'light' | 'dark' | 'night'
-}
-
-export type Setting = {
-  asyncRouter: boolean
-  theme: Theme
-}
+import type { Setting } from '@/types/setting'
 
 export default {
   asyncRouter: false,
-  theme: {
-    mode: 'light'
-  }
+  collapsed: false,
+  themeMode: 'light'
 } as Setting

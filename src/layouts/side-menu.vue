@@ -1,13 +1,9 @@
 <script setup lang="ts">
-  import { defineProps } from 'vue'
-  defineProps({
-    themeMode: {
-      type: String,
-      default: ''
-    }
-  })
+  import { useSetting } from '@/hooks/setting'
+
+  const { getCollapsed, getThemeMode } = useSetting()
 </script>
 
 <template>
-  <a-layout-sider :theme="themeMode"> side-menu </a-layout-sider>
+  <a-layout-sider :theme="getThemeMode" :collapsed="getCollapsed"> side-menu </a-layout-sider>
 </template>
