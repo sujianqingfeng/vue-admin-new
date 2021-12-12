@@ -1,7 +1,7 @@
 import type { Setting } from '@/types/setting'
 
 export default {
-  asyncRouter: false,
+  asyncRouter: true,
   collapsed: false,
   themeMode: 'light'
 } as Setting

@@ -1,7 +1,15 @@
-import { RouteRecordRaw } from 'vue-router'
+import type { RouteConfig } from '@/types/route'
+import { parseRoute } from '../utils'
 
-const routers: RouteRecordRaw[] = []
+const routerConfigs: RouteConfig[] = [
+  {
+    name: 'root',
+    children: [
+      {
+        name: 'dashboard'
+      }
+    ]
+  }
+]
 
-const parseRoute = () => {}
-
-export default routers
+export default parseRoute(routerConfigs)

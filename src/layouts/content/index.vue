@@ -1,3 +1,5 @@
 <template>
-  <a-layout-content>Content</a-layout-content>
+  <a-layout-content>
+    <router-view />
+  </a-layout-content>
 </template>

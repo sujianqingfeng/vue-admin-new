@@ -1,28 +1,45 @@
 import type { App } from 'vue'
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import asyncRouters from './async/config.async'
-import routers from './config'
-import { useSettingStore } from '@/store/modules/setting'
-
-function getRouters(async: boolean): RouteRecordRaw[] {
-  return async ? asyncRouters : routers
-}
+import { createRouter, createWebHistory } from 'vue-router'
+import { isDev } from '@/utils/share'
+import localRoutes from './local'
+import devRouters from './dev'
+import { useSetting } from '@/hooks/store/setting'
+import { useAccountStore } from '@/store/modules/account'
+import { addRoutes, parseRoute } from './utils'
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: []
+  routes: localRoutes
 })
 
 export function setupRouter(app: App) {
   app.use(router)
 
-  // TODO 后续这里抽取成一个方法
-  const setting = useSettingStore()
-  const routes = getRouters(setting.asyncRouter)
-  routes.forEach((route) => {
-    router.addRoute(route)
+  let isRegisterRouter = false
+
+  router.beforeEach((to, form, next) => {
+    if (isRegisterRouter) {
+      next()
+    } else {
+      // 为了方便开发 添加了一个开发路由
+      if (isDev) {
+        addRoutes(router, devRouters)
+      }
+
+      const { asyncRouter } = useSetting()
+      const accountStore = useAccountStore()
+
+      // 异步路由模式
+      if (asyncRouter) {
+        const asyncRoutes = parseRoute(accountStore.routeConfig)
+        addRoutes(router, asyncRoutes)
+      }
+
+      next({ ...to, replace: true })
+
+      isRegisterRouter = true
+    }
   })
-  router.push('/')
 }
 
 export { router }
