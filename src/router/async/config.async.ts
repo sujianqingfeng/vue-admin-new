@@ -1,3 +1,7 @@
 import { RouteRecordRaw } from 'vue-router'
 
-export default [] as RouteRecordRaw[]
+const routers: RouteRecordRaw[] = []
+
+const parseRoute = () => {}
+
+export default routers

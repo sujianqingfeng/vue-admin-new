@@ -7,7 +7,8 @@ const routers: RouteRecordRaw[] = [
   },
   {
     path: '/',
-    component: () => import('@/layouts/admin-layout.vue')
+    component: () => import('@/layouts/admin-layout.vue'),
+    children: []
   }
 ]
 
