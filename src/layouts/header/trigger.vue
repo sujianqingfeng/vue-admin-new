@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useSetting } from '@/hooks/setting'
+  import { useSetting } from '@/hooks'
   import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
 
   const { getCollapsed, toggleCollapsed } = useSetting()

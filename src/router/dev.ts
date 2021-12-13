@@ -7,7 +7,20 @@ const routers: RouteRecordRaw[] = [
     children: [
       {
         path: '/dashboard',
-        component: () => import('@/pages/dashboard/index.vue')
+        name: 'Dashboard',
+        component: () => import('@/pages/dashboard/index.vue'),
+        meta: {
+          icon: 'fff',
+          invisible: true
+        }
+      },
+      {
+        path: '/permission',
+        name: '权限',
+        component: () => import('@/pages/permission/index.vue'),
+        meta: {
+          icon: ''
+        }
       }
     ]
   }

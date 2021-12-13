@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useSetting } from '@/hooks/setting'
+  import { useSetting } from '@/hooks'
 
   const { getCollapsed, getThemeMode } = useSetting()
 </script>

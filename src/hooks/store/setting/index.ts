@@ -8,13 +8,11 @@ export function useSetting() {
 
   const getThemeMode = computed(() => settingStore.themeMode)
 
-    const asyncRouter = settingStore.asyncRouter
+  const asyncRouter = settingStore.asyncRouter
 
-  
   function toggleCollapsed() {
     settingStore.setCollapsed(!unref(getCollapsed))
   }
-
 
   return { getCollapsed, toggleCollapsed, getThemeMode, asyncRouter }
 }

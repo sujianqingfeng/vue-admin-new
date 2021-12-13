@@ -1,14 +1,14 @@
-import { RouteRecordRaw, Router } from 'vue-router'
+import { RouteRecordRaw, Router, RouteRecord } from 'vue-router'
 import type { RouteConfig } from '@/types/route'
 
 import { routeMap } from '../async/route.map'
 import { warn } from '@/utils/log'
+import { Menu } from '@/types/account'
 
 export const parseRoute = (configs: RouteConfig[]) => {
   const routers: RouteRecordRaw[] = []
 
   for (const config of configs) {
-    console.log(config)
     const { name, children = [] } = config
     const route = routeMap[name]
 
@@ -31,4 +31,33 @@ export const addRoutes = (router: Router, routes: RouteRecordRaw[] = []) => {
   routes.forEach((route) => {
     router.addRoute(route)
   })
+}
+
+function parseMenu(subMenus: RouteRecordRaw[]) {
+  const visibleMenus = subMenus.filter((item) => !item.meta?.invisible)
+
+  const results: Menu[] = []
+
+  visibleMenus.forEach((item) => {
+    const { name, children } = item
+
+    const result: Menu = {
+      name: name || '暂无Name'
+    }
+
+    if (children && children.length) {
+      result.children = parseMenu(children)
+    }
+
+    results.push(result)
+  })
+
+  return results
+}
+
+export const parseRoutesToMenu = (routers: RouteRecord[]) => {
+  const root = routers.find((item) => item.path === '/')
+  if (root) {
+    return parseMenu(root.children)
+  }
 }
