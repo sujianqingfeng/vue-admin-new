@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Account } from '@/types/account'
+import type { Account, Menu } from '@/types/account'
 import { RouteConfig } from '@/types/route'
 import { getLocalStorage, setLocalStorage } from '@/utils/share'
 
@@ -8,13 +8,17 @@ const ROUTE_KEY = import.meta.env.VITE_ROUTE_KEY
 export const useAccountStore = defineStore('account', {
   state: (): Account => {
     return {
-      routeConfig: getLocalStorage<RouteConfig[]>(ROUTE_KEY, [])
+      routeConfigs: getLocalStorage<RouteConfig[]>(ROUTE_KEY, []),
+      menus: []
     }
   },
   actions: {
-    setRouteConfig(config: RouteConfig[]) {
-      this.routeConfig = config
-      setLocalStorage(ROUTE_KEY, config)
+    setRouteConfigs(configs: RouteConfig[]) {
+      this.routeConfigs = configs
+      setLocalStorage(ROUTE_KEY, configs)
+    },
+    setMenus(menus: Menu[]) {
+      this.menus = menus
     }
   }
 })

@@ -1,11 +1,12 @@
-import type { RouteRecordName } from 'vue-router'
 import type { RouteConfig } from './route'
 
 export type Account = {
-  routeConfig: RouteConfig[]
+  routeConfigs: RouteConfig[]
+  menus: Menu[]
 }
 
 export type Menu = {
-  name: RouteRecordName
+  name: string
+  icon?: string
   children?: Menu[]
 }

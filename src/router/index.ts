@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { isDev } from '@/utils/share'
 import localRoutes from './local'
 import devRouters from './dev'
-import { useSetting } from '@/hooks/store/setting'
+import { useSetting } from '@/hooks'
 import { useAccountStore } from '@/store/modules/account'
 import { addRoutes, parseRoute, parseRoutesToMenu } from './utils'
 import { info } from '@/utils/log'
@@ -33,13 +33,17 @@ export function setupRouter(app: App) {
 
       // 异步路由模式
       if (asyncRouter) {
-        const asyncRoutes = parseRoute(accountStore.routeConfig)
+        const asyncRoutes = parseRoute(accountStore.routeConfigs)
         info('异步路由加载模式，路由：', asyncRoutes)
         addRoutes(router, asyncRoutes)
       }
 
       const menus = parseRoutesToMenu(router.getRoutes())
+
       info('生成菜单数据:', menus)
+      if (menus) {
+        accountStore.setMenus(menus)
+      }
 
       next({ ...to, replace: true })
 

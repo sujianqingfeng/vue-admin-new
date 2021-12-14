@@ -2,6 +2,6 @@ import deepMerge from 'deepmerge'
 import customSetting from './setting'
 import defaultSetting from './default'
 
-const setting = deepMerge(defaultSetting, customSetting)
+export * from './icon-map'
 
-export default setting
+export const setting = deepMerge(defaultSetting, customSetting)
