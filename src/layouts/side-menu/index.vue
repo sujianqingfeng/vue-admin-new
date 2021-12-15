@@ -9,7 +9,16 @@
 </script>
 
 <template>
-  <a-layout-sider :theme="getThemeMode" :collapsed="getCollapsed" :trigger="null" collapsible>
+  <a-layout-sider class="layout-sider" :theme="getThemeMode" :collapsed="getCollapsed" :trigger="null" collapsible>
     <multiple-menu :menus="menus"></multiple-menu>
   </a-layout-sider>
 </template>
+
+<style lang="less">
+  .layout-sider {
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    left: 0;
+  }
+</style>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import LayoutTrigger from './trigger.vue'
+  import Avatar from './avatar.vue'
 </script>
 
 <template>
@@ -8,7 +9,9 @@
       <layout-trigger></layout-trigger>
     </div>
 
-    <div class="action">ff</div>
+    <div class="action">
+      <avatar></avatar>
+    </div>
   </a-layout-header>
 </template>
 

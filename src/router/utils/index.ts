@@ -39,10 +39,11 @@ function parseMenu(subMenus: RouteRecordRaw[]) {
   const results: Menu[] = []
 
   visibleMenus.forEach((item) => {
-    const { name, children, meta } = item
+    const { name, children, meta,path } = item
 
     const result: Menu = {
-      name: (name as string) || '暂无Name'
+      name: (name as string) || '暂无Name',
+      path
     }
 
     if (meta) {
