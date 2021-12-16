@@ -22,6 +22,7 @@
     align-items: center;
     height: 48px;
     line-height: 48px;
+    padding: 0;
     background-color: white;
   }
 </style>

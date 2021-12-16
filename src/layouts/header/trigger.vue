@@ -2,12 +2,18 @@
   import { useSetting } from '@/hooks'
   import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
 
-  const { getCollapsed, toggleCollapsed } = useSetting()
+  const { collapsed, toggleCollapsed } = useSetting()
 </script>
 
 <template>
-  <div @click="toggleCollapsed">
-    <MenuUnfoldOutlined v-if="getCollapsed" />
+  <span class="menu-trigger" @click="toggleCollapsed">
+    <MenuUnfoldOutlined v-if="collapsed" />
     <MenuFoldOutlined v-else />
-  </div>
+  </span>
 </template>
+
+<style lang="less" scoped>
+  .menu-trigger {
+    padding: 1px 10px 0;
+  }
+</style>

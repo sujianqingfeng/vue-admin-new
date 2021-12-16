@@ -14,5 +14,5 @@ export const useSettingStore = defineStore('setting', {
     setCollapsed(collapsed: boolean) {
       this.collapsed = collapsed
     }
-  }
+  },
 })
