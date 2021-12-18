@@ -1,28 +1,10 @@
 <script setup lang="ts">
-  import LayoutTrigger from './trigger.vue'
-  import Avatar from './avatar.vue'
+  import ActionHeader from './active-header.vue'
+  import TabHeader from './tab/header.vue'
 </script>
 
 <template>
-  <a-layout-header class="layout-header">
-    <div class="left">
-      <layout-trigger></layout-trigger>
-    </div>
+  <action-header />
 
-    <div class="action">
-      <avatar></avatar>
-    </div>
-  </a-layout-header>
+  <tab-header />
 </template>
-
-<style lang="less" scoped>
-  .layout-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 48px;
-    line-height: 48px;
-    padding: 0;
-    background-color: white;
-  }
-</style>
