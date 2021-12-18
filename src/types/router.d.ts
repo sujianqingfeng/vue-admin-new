@@ -5,5 +5,7 @@ declare module 'vue-router' {
   interface RouteMeta {
     icon?: string
     invisible?: boolean
+    title?: string
+    canNotRemoveTab?: boolean
   }
 }

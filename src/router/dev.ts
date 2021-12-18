@@ -10,22 +10,27 @@ const routers: RouteRecordRaw[] = [
         name: 'Dashboard',
         component: () => import('@/pages/dashboard/index.vue'),
         meta: {
-          icon: 'cloud'
+          icon: 'cloud',
+          title: 'Dashboard',
+          canNotRemoveTab: true
         }
       },
       {
         path: '/permission',
-        name: '权限',
+        name: 'permission',
         component: () => import('@/pages/permission/index.vue'),
         meta: {
+          title: '权限',
           icon: 'cloud'
         }
       },
       {
-        path: '/keep-alive',
-        name: 'KeepAlive',
+        path: '/multiple',
+        name: '多级菜单',
         component: () => import('@/pages/permission/index.vue'),
-        meta: {},
+        meta: {
+          icon: 'cloud'
+        },
         children: [
           {
             path: '/active/1',
