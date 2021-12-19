@@ -7,7 +7,7 @@ import type { RouteMap } from '@/types/route'
 export const routeMap: RouteMap = {
   root: {
     path: '/',
-    component: () => import('@/layouts/admin-layout.vue')
+    component: () => import('@/layouts/index.vue')
   },
   dashboard: {
     path: '/dashboard',

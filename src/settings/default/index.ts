@@ -4,6 +4,6 @@ export default {
   asyncRouter: true,
   collapsed: false,
   themeMode: 'light',
-  menuWidth: 200,
-  menuCollapseWidth: 80
+  menuWidth: 210,
+  menuCollapseWidth: 50
 } as Setting

@@ -33,22 +33,31 @@ export const addRoutes = (router: Router, routes: RouteRecordRaw[] = []) => {
   })
 }
 
-function parseMenu(subMenus: RouteRecordRaw[]) {
-  const visibleMenus = subMenus.filter((item) => !item.meta?.invisible)
+function filterVisibleMenu(menus: RouteRecordRaw[]) {
+  return menus.filter((item) => !item.meta?.invisible)
+}
+
+function parseMenu(subMenus: RouteRecordRaw[], parentPath: string = '') {
+  const visibleMenus = filterVisibleMenu(subMenus)
 
   const results: Menu[] = []
 
   visibleMenus.forEach((item) => {
-    const { name, children, meta, path } = item
+    const { name, children = [], meta, path } = item
+
+    const isStartWithSlash = /$\//.test(path)
+
+    const realPath = isStartWithSlash ? path : `${parentPath}/${path}`
 
     const result: Menu = {
       name: meta?.title || (name as string) || '暂无Name',
-      path,
+      path: realPath,
       icon: meta?.icon
     }
 
-    if (children && children.length) {
-      result.children = parseMenu(children)
+    const visibleChildren = filterVisibleMenu(children)
+    if (visibleChildren.length) {
+      result.children = parseMenu(children, realPath)
     }
 
     results.push(result)

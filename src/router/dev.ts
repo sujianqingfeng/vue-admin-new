@@ -1,12 +1,14 @@
 import { RouteRecordRaw } from 'vue-router'
 
+import BlankView from '@/layouts/blank-view.vue'
+
 const routers: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('@/layouts/admin-layout.vue'),
+    component: () => import('@/layouts/index.vue'),
     children: [
       {
-        path: '/dashboard',
+        path: 'dashboard',
         name: 'Dashboard',
         component: () => import('@/pages/dashboard/index.vue'),
         meta: {
@@ -16,7 +18,7 @@ const routers: RouteRecordRaw[] = [
         }
       },
       {
-        path: '/permission',
+        path: 'permission',
         name: 'permission',
         component: () => import('@/pages/permission/index.vue'),
         meta: {
@@ -25,20 +27,39 @@ const routers: RouteRecordRaw[] = [
         }
       },
       {
-        path: '/multiple',
-        name: '多级菜单',
-        component: () => import('@/pages/permission/index.vue'),
+        path: 'multiple',
+        name: 'multiple',
+        component: BlankView,
         meta: {
-          icon: 'cloud'
+          icon: 'cloud',
+          title: '多级菜单'
         },
         children: [
           {
-            path: '/active/1',
-            name: 'test1',
-            component: () => import('@/pages/permission/index.vue')
+            path: 'keep-alive',
+            name: 'keep-alive',
+            component: BlankView,
+            children: [
+              {
+                path: '',
+                name: 'test111',
+                component: () => import('@/pages/keep-alive/test1.vue'),
+                meta: {
+                  invisible: true
+                }
+              },
+              {
+                path: 'keep2',
+                name: 'test222',
+                component: () => import('@/pages/keep-alive/test2.vue'),
+                meta: {
+                  invisible: true
+                }
+              }
+            ]
           },
           {
-            path: '/active/2',
+            path: 'test2',
             name: 'test2',
             component: () => import('@/pages/permission/index.vue')
           }

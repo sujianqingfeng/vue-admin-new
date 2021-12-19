@@ -16,10 +16,12 @@
     () => route.path,
     (path, old) => {
       info(`path change | ${old} -> ${path}`)
+      const { matched } = route
+
       const {
         name,
         meta: { title, canNotRemoveTab = false }
-      } = route
+      } = matched[matched.length - 1]
 
       activeTab.value = path
       tabStore.addTab({ title: title || (name as string), path, closable: !canNotRemoveTab })
@@ -42,6 +44,7 @@
 </script>
 
 <template>
+  {{ tabs }}
   <div>
     <a-tabs :active-key="activeTab" type="editable-card" hide-add :tab-bar-gutter="3" @edit="handleEdit" @change="handleChange">
       <a-tab-pane v-for="tab in tabs" :key="tab.path" :tab="tab.title" :closable="tab.closable"> </a-tab-pane>

@@ -32,7 +32,7 @@ export function setupRouter(app: App) {
       const accountStore = useAccountStore()
 
       // 异步路由模式
-      if (asyncRouter) {
+      if (asyncRouter.value) {
         const asyncRoutes = parseRoute(accountStore.routeConfigs)
         info('异步路由加载模式，路由：', asyncRoutes)
         addRoutes(router, asyncRoutes)
