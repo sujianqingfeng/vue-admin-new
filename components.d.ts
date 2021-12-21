@@ -17,6 +17,7 @@ declare module 'vue' {
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
     ATabPane: typeof import('ant-design-vue/es')['TabPane']
     ATabs: typeof import('ant-design-vue/es')['Tabs']
+    Ripple: typeof import('./src/components/ripple/index.vue')['default']
   }
 }
 

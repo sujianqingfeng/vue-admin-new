@@ -1,24 +1,14 @@
 <script setup lang="ts">
   import LayoutTrigger from './trigger.vue'
   import Avatar from './avatar.vue'
-  import { useBreadcrumb } from './hooks/useBreadcrumb'
-
-  const { breadcrumbs } = useBreadcrumb()
+  import Breadcrumb from './breadcrumb.vue'
 </script>
 
 <template>
   <a-layout-header class="layout-header">
     <div class="left">
       <layout-trigger></layout-trigger>
-
-      <a-breadcrumb :routes="breadcrumbs">
-        <template #itemRender="{ route, routes }">
-          <span v-if="routes.indexOf(route) === routes.length - 1">
-            {{ route.title }}
-          </span>
-          <router-link v-else to=""> {{ route.title }} </router-link>
-        </template>
-      </a-breadcrumb>
+      <breadcrumb />
     </div>
 
     <div class="action">

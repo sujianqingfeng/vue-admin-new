@@ -1,15 +1,16 @@
 <script setup lang="ts">
   import { useSetting } from '@/hooks'
   import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
+  import Ripple from '@/components/ripple/index.vue'
 
   const { collapsed, toggleCollapsed } = useSetting()
 </script>
 
 <template>
-  <span class="menu-trigger" @click="toggleCollapsed">
+  <ripple class="menu-trigger" @click="toggleCollapsed">
     <MenuUnfoldOutlined v-if="collapsed" />
     <MenuFoldOutlined v-else />
-  </span>
+  </ripple>
 </template>
 
 <style lang="less" scoped>

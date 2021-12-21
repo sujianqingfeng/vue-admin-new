@@ -42,7 +42,7 @@ const routers: RouteRecordRaw[] = [
             children: [
               {
                 path: '',
-                name: 'test111',
+                name: 'keep1',
                 component: () => import('@/pages/keep-alive/test1.vue'),
                 meta: {
                   invisible: true
@@ -50,7 +50,7 @@ const routers: RouteRecordRaw[] = [
               },
               {
                 path: 'keep2',
-                name: 'test222',
+                name: 'keep2',
                 component: () => import('@/pages/keep-alive/test2.vue'),
                 meta: {
                   invisible: true

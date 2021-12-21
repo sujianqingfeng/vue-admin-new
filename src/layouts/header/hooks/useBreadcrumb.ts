@@ -11,8 +11,14 @@ type Breadcrumb = {
 function parseToBreadcrumb(raws: RouteRecordRaw[]) {
   const results: Breadcrumb[] = []
 
-  raws.forEach((item) => {
-    const { name, path, children, meta } = item
+  raws.forEach((raw) => {
+    const { name, path, children, meta } = raw
+
+    // const index = results.findIndex((item) => item.path === path)
+    // // 存在移除
+    // if (index > -1) {
+    //   results.splice(index, 1)
+    // }
 
     const result: Breadcrumb = {
       path,
@@ -25,7 +31,9 @@ function parseToBreadcrumb(raws: RouteRecordRaw[]) {
       result.children = parseToBreadcrumb(children.filter((item) => !item.meta?.invisible))
     }
 
-    results.push(result)
+    if (!meta?.invisible) {
+      results.push(result)
+    }
   })
 
   return results
@@ -38,6 +46,7 @@ export function useBreadcrumb() {
 
   watchEffect(() => {
     const matched = route.matched.filter((item) => item.path !== '/')
+
     breadcrumbs.value = parseToBreadcrumb(matched)
   })
 
