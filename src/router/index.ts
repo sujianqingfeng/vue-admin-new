@@ -1,7 +1,7 @@
 import type { App } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { isDev } from '@/utils/share'
-import localRoutes from './local'
+import basicRoutes from './basic'
 import devRouters from './dev'
 import { useSetting } from '@/hooks'
 import { useAccountStore } from '@/store/modules/account'
@@ -10,7 +10,7 @@ import { info } from '@/utils/log'
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: localRoutes
+  routes: basicRoutes
 })
 
 export function setupRouter(app: App) {
