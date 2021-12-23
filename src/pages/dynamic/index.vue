@@ -1,12 +1,10 @@
 <script lang="ts" setup>
   import { useLog } from '@/hooks/utils/log'
-  import { h } from 'vue'
+  import { h, SetupContext } from 'vue'
 
   const { info } = useLog()
 
-  const AComponent = (props: any, ctx: any) => {
-    console.log(props, ctx)
-
+  const AComponent = (props: any, ctx: SetupContext) => {
     return h(
       'div',
       {
@@ -19,9 +17,7 @@
     )
   }
 
-  const BComponent = (props: any, ctx: any) => {
-    console.log(props, ctx)
-
+  const BComponent = (props: any, ctx: SetupContext) => {
     return h(
       'div',
       {
