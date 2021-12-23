@@ -27,6 +27,15 @@ const routers: RouteRecordRaw[] = [
         }
       },
       {
+        path: 'dynamic',
+        name: 'dynamic',
+        component: () => import('@/pages/dynamic/index.vue'),
+        meta: {
+          title: '动态组件测试',
+          icon: 'cloud'
+        }
+      },
+      {
         path: 'multiple',
         name: 'multiple',
         component: BlankView,
