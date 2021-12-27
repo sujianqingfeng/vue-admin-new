@@ -5,6 +5,8 @@ import eslint from 'vite-plugin-eslint'
 import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 
+import { generateModifyVars } from './build/theme/config'
+
 const resolve = (dir: string) => path.resolve(__dirname, dir)
 
 export default defineConfig({
@@ -18,9 +20,21 @@ export default defineConfig({
     eslint(),
     Components({
       dts: true,
-      resolvers: [AntDesignVueResolver()]
+      resolvers: [
+        AntDesignVueResolver({
+          importStyle: 'less'
+        })
+      ]
     })
   ],
+  css: {
+    preprocessorOptions: {
+      less: {
+        modifyVars: generateModifyVars(),
+        javascriptEnabled: true
+      }
+    }
+  },
   server: {
     proxy: {
       '/api': {

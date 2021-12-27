@@ -12,7 +12,7 @@
 <template>
   permission
 
-  <p @click="onClick($event, 1)">点击事件</p>
+  <a-button type="primary" @click="onClick($event, 1)">点击事件</a-button>
 
   <p v-permission:menu>测试指令 menu</p>
   <p v-permission:men>测试指令 men</p>
