@@ -37,7 +37,7 @@ function filterVisibleMenu(menus: RouteRecordRaw[]) {
   return menus.filter((item) => !item.meta?.invisible)
 }
 
-function parseMenu(subMenus: RouteRecordRaw[], parentPath: string = '') {
+function parseMenu(subMenus: RouteRecordRaw[], parentPath = '') {
   const visibleMenus = filterVisibleMenu(subMenus)
 
   const results: Menu[] = []

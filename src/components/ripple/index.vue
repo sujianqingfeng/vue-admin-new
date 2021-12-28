@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+  import { useEventListener } from '@/hooks/web'
   import { ref } from 'vue'
 
   const rippleWrapperRef = ref<HTMLElement | null>(null)
@@ -6,26 +7,31 @@
   const rippleShow = ref(false)
   const rippleStyle = ref({})
 
-  function onRippleWrapper(e: MouseEvent) {
-    console.log(e, rippleWrapperRef.value)
-
-    const currentTarget = rippleWrapperRef.value
-
-    if (!currentTarget) return
-    rippleShow.value = true
-
-    const d = Math.max(currentTarget.clientHeight, currentTarget.clientWidth)
-    rippleStyle.value = {
-      width: d + 'px',
-      height: d + 'px',
-      left: e.clientX - currentTarget?.offsetLeft - d / 2 + 'px',
-      top: e.clientY - currentTarget?.offsetTop - d / 2 + 'px'
+  useEventListener(rippleWrapperRef, 'click', (e: Event) => {
+    if (rippleWrapperRef.value) {
+      const style = createRippleStyle(rippleWrapperRef.value as HTMLElement, e as MouseEvent)
+      console.log(style)
     }
+  })
+
+  function createRippleStyle(el: HTMLElement, e: MouseEvent) {
+    const { clientHeight, clientWidth, offsetLeft, offsetTop } = el
+
+    const size = Math.max(clientHeight, clientWidth)
+
+    const { clientX, clientY } = e
+
+    const left = clientX - offsetLeft - size / 2 + 'px'
+    const top = clientY - offsetTop - size / 2 + 'px'
+
+    const sizeUnit = size + 'px'
+
+    return { width: sizeUnit, height: sizeUnit, left, top }
   }
 </script>
 
 <template>
-  <div ref="rippleWrapperRef" class="ripple-wrapper" @click="onRippleWrapper">
+  <div ref="rippleWrapperRef" class="ripple-wrapper">
     <div v-if="rippleShow" class="ripple" :style="rippleStyle"></div>
     <slot />
   </div>

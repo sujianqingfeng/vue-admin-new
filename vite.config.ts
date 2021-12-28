@@ -17,7 +17,8 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    eslint(),
+    // cache 最好关闭 踩了坑
+    eslint({ cache: false }),
     Components({
       dts: true,
       resolvers: [

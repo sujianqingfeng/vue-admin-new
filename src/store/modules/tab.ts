@@ -59,7 +59,7 @@ export const useTabStore = defineStore('tab', {
       }
 
       if (index > -1) {
-        let toTargetTab = this.tabs[index - 1]
+        const toTargetTab = this.tabs[index - 1]
 
         router.push(toTargetTab.path)
       }

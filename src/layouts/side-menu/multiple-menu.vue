@@ -5,6 +5,10 @@
   import { useMenuKeys } from './hooks/useMenuKeys'
   import { useMultipleSubMenu } from './hooks/useMultipleSubMenu'
 
+  type MenuItem = {
+    key: string
+  }
+
   const props = defineProps({
     menus: {
       type: Array as PropType<Menu[]>,
@@ -17,7 +21,7 @@
   const { selectedKeys, openKeys } = useMenuKeys()
 
   const router = useRouter()
-  const onMenuClick = ({ key: path }: any) => {
+  const onMenuClick = ({ key: path }: MenuItem) => {
     router.push(path)
   }
 </script>
