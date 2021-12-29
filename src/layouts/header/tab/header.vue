@@ -44,7 +44,6 @@
 </script>
 
 <template>
-  {{ tabs }}
   <div>
     <a-tabs :active-key="activeTab" type="editable-card" hide-add :tab-bar-gutter="3" @edit="handleEdit" @change="handleChange">
       <a-tab-pane v-for="tab in tabs" :key="tab.path" :tab="tab.title" :closable="tab.closable"> </a-tab-pane>

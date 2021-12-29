@@ -1,8 +1,0 @@
-{
-  "baseUrl": "http://localhost:3000",
-
-  "component": {
-    "componentFolder": "src",
-    "testFiles": "**/*cy.*"
-  }
-}

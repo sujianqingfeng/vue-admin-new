@@ -4,7 +4,7 @@
 
   const { info } = useLog()
 
-  const AComponent = (props: any, ctx: SetupContext) => {
+  const AComponent = (props: unknown, ctx: SetupContext) => {
     return h(
       'div',
       {
@@ -17,7 +17,7 @@
     )
   }
 
-  const BComponent = (props: any, ctx: SetupContext) => {
+  const BComponent = (props: unknown, ctx: SetupContext) => {
     return h(
       'div',
       {

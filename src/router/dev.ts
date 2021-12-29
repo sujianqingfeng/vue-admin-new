@@ -6,6 +6,7 @@ const routers: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('@/layouts/index.vue'),
+    redirect: '/dashboard',
     children: [
       {
         path: 'dashboard',

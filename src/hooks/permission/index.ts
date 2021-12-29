@@ -2,21 +2,21 @@ import { usePermissionStore } from '@/store/modules/permission'
 import { message } from 'ant-design-vue'
 
 type Option = {
-  key: string
+  code: string
   values?: string | string[]
   msg?: string
 }
 
-export function usePermissionFn(cb: Function, { key, values, msg = '没有权限操作' }: Option): Function {
+export function usePermissionFn(cb: () => void, { code, values, msg = '没有权限操作' }: Option): () => void {
   const permissionStore = usePermissionStore()
 
-  return function () {
-    const isExist = permissionStore.hasPermission(key, values)
+  return (...args) => {
+    const isExist = permissionStore.hasPermission(code, values)
     if (!isExist) {
       message.info(msg)
       return
     }
 
-    cb.apply(null, arguments)
+    cb(...args)
   }
 }

@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, Ref, unref } from 'vue'
+import { isRef, onMounted, onUnmounted, Ref, unref } from 'vue'
 
 export function useEventListener(
   target: EventTarget | Ref,
@@ -11,8 +11,16 @@ export function useEventListener(
     return
   }
 
+  const targetIsRef = isRef(target)
+
+  if (!targetIsRef) {
+    target.addEventListener(event, listener, options)
+  }
+
   onMounted(() => {
-    unref(target).addEventListener(event, listener, options)
+    if (targetIsRef) {
+      unref(target).addEventListener(event, listener, options)
+    }
   })
 
   onUnmounted(() => {

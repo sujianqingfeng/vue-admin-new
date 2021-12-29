@@ -1,3 +1,15 @@
+<script lang="ts" setup>
+  import Center from '@/components/center/index.vue'
+</script>
+
 <template>
-  <a-layout-footer>Footer</a-layout-footer>
+  <center>
+    <a-layout-footer>© footer</a-layout-footer>
+  </center>
 </template>
+
+<style lang="less" scoped>
+  .ant-layout-footer {
+    padding: @padding-md;
+  }
+</style>
