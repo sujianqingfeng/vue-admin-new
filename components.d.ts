@@ -4,6 +4,14 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AButton: typeof import('ant-design-vue/es')['Button']
+    ACol: typeof import('ant-design-vue/es')['Col']
+    AConfigProvider: typeof import('ant-design-vue/es')['ConfigProvider']
+    AForm: typeof import('ant-design-vue/es')['Form']
+    AFormItem: typeof import('ant-design-vue/es')['FormItem']
+    AInput: typeof import('ant-design-vue/es')['Input']
+    AInputPassword: typeof import('ant-design-vue/es')['InputPassword']
+    ARow: typeof import('ant-design-vue/es')['Row']
     Center: typeof import('./src/components/center/index.vue')['default']
     Modal: typeof import('./src/components/modal/modal.vue')['default']
     Ripple: typeof import('./src/components/ripple/index.vue')['default']
