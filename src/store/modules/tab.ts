@@ -1,7 +1,7 @@
 import { unref } from 'vue'
 import { Router } from 'vue-router'
-import { getLocalStorage, setLocalStorage } from '@/utils/share'
 import { defineStore } from 'pinia'
+import { DataStore, DataStoreType } from '@/utils/data-store'
 
 type TabItem = {
   title?: string
@@ -18,7 +18,7 @@ const TAB_KEY = import.meta.env.VITE_TAB_KEY
 export const useTabStore = defineStore('tab', {
   state: (): TabState => {
     return {
-      tabs: getLocalStorage(TAB_KEY, [])
+      tabs: (DataStore.get(TAB_KEY, DataStoreType.JSON) as TabItem[]) || []
     }
   },
   getters: {
@@ -31,7 +31,7 @@ export const useTabStore = defineStore('tab', {
       return (item: TabItem) => item.path === path
     },
     saveTabs() {
-      setLocalStorage(TAB_KEY, this.tabs)
+      DataStore.set(TAB_KEY, this.tabs)
     },
     addTab(tab: TabItem) {
       const { path } = tab

@@ -3400,7 +3400,7 @@ vue-router@^4.0.12:
 
 vue-tsc@^0.31.1:
   version "0.30.1"
-  resolved "https://registry.yarnpkg.com/vue-tsc/-/vue-tsc-0.30.1.tgz#c47011c4190bf70c11865a2d8cdc3cac635b4771"
+  resolved "https://registry.npmmirror.com/vue-tsc/download/vue-tsc-0.30.1.tgz#c47011c4190bf70c11865a2d8cdc3cac635b4771"
   integrity sha512-AVBPWF70LvuzAt6phaF3U8pg1WmjmZQBfZvkX4Ve9EHTPh4R2JiJnSjf3MQgnx03qF5w0PGkBJ90l12aaLZeKQ==
   dependencies:
     "@volar/shared" "0.30.1"

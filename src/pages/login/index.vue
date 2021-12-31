@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { reactive, ref } from 'vue'
-  import { fetchLoginApi } from '@/services/user'
   import { useRouter } from 'vue-router'
   import type { FormInstance } from 'ant-design-vue'
+  import { useUserLogin } from '@/hooks/data/user'
 
   const formRef = ref<FormInstance>()
 
@@ -11,17 +11,12 @@
     password: 'admin'
   })
 
-  function onLogin() {
-    formRef.value
-      ?.validate()
-      .then(() => fetchLoginApi(user))
-      .then(afterLogin)
-  }
+  const { fetchUserLogin } = useUserLogin()
 
   const router = useRouter()
-
-  function afterLogin(res: unknown) {
-    console.log(res)
+  async function onLogin() {
+    await formRef.value?.validate()
+    await fetchUserLogin(user)
     router.push('/')
   }
 </script>

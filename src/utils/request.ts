@@ -33,11 +33,11 @@ axiosInstance.interceptors.response.use((res: AxiosResponse<BaseResponse>) => {
 })
 
 export const request = {
-  get(url: string, params?: object) {
-    return axiosInstance.get(url, { params })
+  get<R = any, T = any>(url: string, params?: object) {
+    return axiosInstance.get<T, R>(url, { params })
   },
-  post(url: string, data: object) {
-    return axiosInstance.post(url, data)
+  post<R = any, T = any>(url: string, data: object) {
+    return axiosInstance.post<T, R>(url, data)
   },
   postText(url: string, text: string) {
     return axiosInstance.post(url, text, {

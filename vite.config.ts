@@ -34,17 +34,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         ]
       }),
       styleImport({
-        resolves: [AndDesignVueResolve()],
-        // 自定义规则
-        libs: [
-          {
-            libraryName: 'ant-design-vue',
-            esModule: true,
-            resolveStyle: (name) => {
-              return `ant-design-vue/es/${name}/style/index`
-            }
-          }
-        ]
+        resolves: [AndDesignVueResolve()]
       }),
 
       viteMockServe({
