@@ -23,5 +23,24 @@ export default [
         message: '密码错误'
       }
     }
+  },
+  {
+    url: '/api/user/routes',
+    method: 'get',
+    response: () => {
+      return {
+        code: 200,
+        data: [
+          {
+            name: '/',
+            children: [
+              {
+                name: 'dashboard'
+              }
+            ]
+          }
+        ]
+      }
+    }
   }
 ] as MockMethod[]
