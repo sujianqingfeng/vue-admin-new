@@ -12,5 +12,9 @@ export const routeMap: RouteMap = {
   dashboard: {
     path: '/dashboard',
     component: () => import('@/pages/dashboard/index.vue')
+  },
+  table: {
+    path: '/table',
+    component: () => import('@/pages/table/index.vue')
   }
 }

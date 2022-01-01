@@ -13,11 +13,12 @@
 
   const { fetchUserLogin } = useUserLogin()
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const router = useRouter()
   async function onLogin() {
     await formRef.value?.validate()
     await fetchUserLogin(user)
-    router.push('/')
+    // router.push('/')
   }
 </script>
 

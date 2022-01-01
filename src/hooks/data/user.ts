@@ -1,10 +1,13 @@
 import { fetchLoginApi, fetchRoutesApi, UserProfile } from '@/apis/user'
-import { parseRoute } from '@/router/utils'
+import { addRoutes, mergeRoute, parseRoute } from '@/router/utils'
 import { DataStore } from '@/utils/data-store'
+import { useRouter } from 'vue-router'
 
 const TOKEN_KEY = import.meta.env.VITE_TOKEN_KEY
 
 export const useUserLogin = () => {
+  const router = useRouter()
+
   const fetchUserLogin = async (info: object) => {
     const userProfile = await fetchLoginApi(info)
     return afterLogin(userProfile)
@@ -13,9 +16,16 @@ export const useUserLogin = () => {
   const fetchUserRoutes = async () => {
     const routesConfigs = await fetchRoutesApi()
 
-    const routers = parseRoute(routesConfigs)
+    const routes = parseRoute(routesConfigs)
+    console.log('routes', routes)
 
-    console.log('routers', routers)
+    const finalRoutes = mergeRoute(router, routes)
+
+    console.log('routers', finalRoutes)
+
+    addRoutes(router, finalRoutes)
+
+    console.log('router', router)
   }
 
   const afterLogin = (userProfile: UserProfile) => {

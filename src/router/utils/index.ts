@@ -6,7 +6,7 @@ import { warn } from '@/utils/log'
 import { Menu } from '@/types/account'
 
 export const parseRoute = (configs: RouteConfig[]) => {
-  const routers: RouteRecordRaw[] = []
+  const routes: RouteRecordRaw[] = []
 
   for (const config of configs) {
     const { name, children = [] } = config
@@ -21,10 +21,14 @@ export const parseRoute = (configs: RouteConfig[]) => {
       route.children = parseRoute(children)
     }
 
-    routers.push(route)
+    routes.push(route)
   }
 
-  return routers
+  return routes
+}
+
+export const mergeRoute = (router: Router, routes: RouteRecordRaw[]) => {
+  return routes
 }
 
 export const addRoutes = (router: Router, routes: RouteRecordRaw[] = []) => {
