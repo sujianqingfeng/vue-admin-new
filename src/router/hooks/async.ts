@@ -4,6 +4,9 @@ import { useAccountStore } from '@/store/modules/account'
 import { info } from '@/utils/log'
 import { addRoutes, parseRoute, parseRoutesToMenu } from '../utils'
 
+import { localAsyncRouteConfigs } from '../async/config.async'
+import { deepMerge } from '@/utils/share'
+
 export const useAsyncRoute = (router: Router) => {
   const { asyncRouter } = useSetting()
   const accountStore = useAccountStore()
@@ -11,8 +14,11 @@ export const useAsyncRoute = (router: Router) => {
   const loadAsyncRoute = () => {
     // 异步路由模式
     if (asyncRouter.value) {
-      const asyncRoutes = parseRoute(accountStore.routeConfigs)
-      info('异步路由加载模式，路由：', asyncRoutes)
+      const routeConfigs = deepMerge(localAsyncRouteConfigs, accountStore.routeConfigs)
+
+      const asyncRoutes = parseRoute(routeConfigs)
+
+      info('异步路由加载模式，最终路由：', asyncRoutes)
       addRoutes(router, asyncRoutes)
     }
 

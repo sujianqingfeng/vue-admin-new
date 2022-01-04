@@ -21,7 +21,12 @@ export class DataStore {
     }
   }
 
-  static set(key: string, value: any) {
+  static set(key: string, value: any, type: DataStoreType = DataStoreType.STRING) {
+    if (type === DataStoreType.JSON) {
+      localStorage.setItem(key, JSON.stringify(value))
+      return
+    }
+
     localStorage.setItem(key, value)
   }
 }

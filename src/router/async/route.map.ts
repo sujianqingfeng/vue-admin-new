@@ -15,6 +15,16 @@ export const routeMap: RouteMap = {
   },
   table: {
     path: '/table',
-    component: () => import('@/pages/table/index.vue')
+    component: () => import('@/pages/table/index.vue'),
+    meta: {
+      title: '表格'
+    }
+  },
+  upload: {
+    path: '/upload',
+    component: () => import('@/pages/upload/index.vue'),
+    meta: {
+      title: '上传'
+    }
   }
 }

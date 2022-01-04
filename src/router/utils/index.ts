@@ -10,13 +10,12 @@ export const parseRoute = (configs: RouteConfig[]) => {
 
   for (const config of configs) {
     const { name, children = [] } = config
-    const route = routeMap[name]
+    const route = { ...routeMap[name] }
 
     if (!route) {
       warn('不存在当前路由，请在map中查看是否存在，或者是否拼写错误')
       break
     }
-
     if (children.length) {
       route.children = parseRoute(children)
     }
@@ -28,6 +27,8 @@ export const parseRoute = (configs: RouteConfig[]) => {
 }
 
 export const mergeRoute = (router: Router, routes: RouteRecordRaw[]) => {
+  console.log(router.getRoutes())
+
   return routes
 }
 
@@ -49,7 +50,7 @@ function parseMenu(subMenus: RouteRecordRaw[], parentPath = '') {
   visibleMenus.forEach((item) => {
     const { name, children = [], meta, path } = item
 
-    const isStartWithSlash = /$\//.test(path)
+    const isStartWithSlash = /^\//.test(path)
 
     const realPath = isStartWithSlash ? path : `${parentPath}/${path}`
 
@@ -71,8 +72,14 @@ function parseMenu(subMenus: RouteRecordRaw[], parentPath = '') {
 }
 
 export const parseRoutesToMenu = (routers: RouteRecord[]) => {
-  const root = routers.find((item) => item.path === '/')
-  if (root) {
-    return parseMenu(root.children)
+  const root = routers.filter((item) => item.path === '/')
+  if (root.length) {
+    const children: RouteRecordRaw[] = []
+
+    root.forEach((item) => {
+      children.push(...item.children)
+    })
+
+    return parseMenu(children)
   }
 }

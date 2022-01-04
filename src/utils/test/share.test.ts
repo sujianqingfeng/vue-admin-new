@@ -45,4 +45,25 @@ describe('deepMerge', () => {
 
     expect(output).toEqual(result)
   })
+
+  it('mix', () => {
+    const target = {
+      name: '/',
+      children: [{ name: 'a' }]
+    }
+
+    const source = {
+      name: '/',
+      children: [{ name: 'b' }]
+    }
+    const result = {
+      name: '/',
+      children: [{ name: 'a' }, { name: 'b' }]
+    }
+
+    const output = deepMerge(target, source)
+    console.log(output)
+
+    expect(output).toEqual(result)
+  })
 })

@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import { reactive, ref } from 'vue'
-  import { useRouter } from 'vue-router'
   import type { FormInstance } from 'ant-design-vue'
   import { useUserLogin } from '@/hooks/data/user'
 
@@ -13,12 +12,9 @@
 
   const { fetchUserLogin } = useUserLogin()
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const router = useRouter()
   async function onLogin() {
     await formRef.value?.validate()
     await fetchUserLogin(user)
-    // router.push('/')
   }
 </script>
 

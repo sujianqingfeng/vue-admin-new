@@ -35,9 +35,6 @@ export default [
             name: 'root',
             children: [
               {
-                name: 'dashboard'
-              },
-              {
                 name: 'table'
               }
             ]

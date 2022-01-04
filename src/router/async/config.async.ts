@@ -1,15 +1,12 @@
 import type { RouteConfig } from '@/types/route'
-import { parseRoute } from '../utils'
 
-const routerConfigs: RouteConfig[] = [
+export const localAsyncRouteConfigs: RouteConfig[] = [
   {
     name: 'root',
     children: [
       {
-        name: 'dashboard'
+        name: 'upload'
       }
     ]
   }
 ]
-
-export default parseRoute(routerConfigs)
