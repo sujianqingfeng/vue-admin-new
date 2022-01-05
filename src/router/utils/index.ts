@@ -1,10 +1,18 @@
 import { RouteRecordRaw, Router, RouteRecord } from 'vue-router'
+
 import type { RouteConfig } from '@/types/route'
 
 import { routeMap } from '../async/route.map'
 import { warn } from '@/utils/log'
 import { Menu } from '@/types/account'
 
+
+/**
+ * 解析路由
+ * 
+ * @param configs 
+ * @returns 
+ */
 export const parseRoute = (configs: RouteConfig[]) => {
   const routes: RouteRecordRaw[] = []
 
@@ -32,18 +40,57 @@ export const mergeRoute = (router: Router, routes: RouteRecordRaw[]) => {
   return routes
 }
 
+/**
+ * 添加路由
+ * 
+ * @param router 
+ * @param routes 
+ */
 export const addRoutes = (router: Router, routes: RouteRecordRaw[] = []) => {
   routes.forEach((route) => {
     router.addRoute(route)
   })
 }
 
+/**
+ * 过滤不可见菜单
+ * 
+ * @param menus 
+ * @returns 
+ */
 function filterVisibleMenu(menus: RouteRecordRaw[]) {
   return menus.filter((item) => !item.meta?.invisible)
 }
 
+/**
+ * 去掉重复菜单
+ * 
+ * @param menus 
+ * @returns 
+ */
+function filterRepeatMenu(menus: RouteRecordRaw[]) {
+  const map = new Map<string, RouteRecordRaw>()
+
+  for (const menu of menus) {
+    const { path } = menu
+    if (!map.has(path)) {
+      map.set(path, menu)
+    }
+  }
+  return Array.from(map.values())
+}
+
+
+/**
+ * 从路由解析菜单
+ * 
+ * @param subMenus 
+ * @param parentPath 
+ * @returns 
+ */
 function parseMenu(subMenus: RouteRecordRaw[], parentPath = '') {
-  const visibleMenus = filterVisibleMenu(subMenus)
+  const uniqueMenus = filterRepeatMenu(subMenus)
+  const visibleMenus = filterVisibleMenu(uniqueMenus)
 
   const results: Menu[] = []
 
@@ -71,6 +118,12 @@ function parseMenu(subMenus: RouteRecordRaw[], parentPath = '') {
   return results
 }
 
+/**
+ * 从/解析菜单
+ * 
+ * @param routers 
+ * @returns 
+ */
 export const parseRoutesToMenu = (routers: RouteRecord[]) => {
   const root = routers.filter((item) => item.path === '/')
   if (root.length) {

@@ -4,7 +4,9 @@ import { setupRouter } from './router'
 import { setupStore } from './store'
 import { setupPlugin } from './plugins'
 
-import './styles/index.less'
+// import './styles/index.less'
+
+import 'virtual:windi.css'
 
 const app = createApp(App)
 

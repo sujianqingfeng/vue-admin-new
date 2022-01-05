@@ -14,11 +14,12 @@ type TabState = {
 }
 
 const TAB_KEY = import.meta.env.VITE_TAB_KEY
+const TYPE = DataStoreType.JSON
 
 export const useTabStore = defineStore('tab', {
   state: (): TabState => {
     return {
-      tabs: (DataStore.get(TAB_KEY, DataStoreType.JSON) as TabItem[]) || []
+      tabs: (DataStore.get(TAB_KEY, TYPE) as TabItem[]) || []
     }
   },
   getters: {
@@ -31,7 +32,7 @@ export const useTabStore = defineStore('tab', {
       return (item: TabItem) => item.path === path
     },
     saveTabs() {
-      DataStore.set(TAB_KEY, this.tabs)
+      DataStore.set(TAB_KEY, this.tabs, TYPE)
     },
     addTab(tab: TabItem) {
       const { path } = tab

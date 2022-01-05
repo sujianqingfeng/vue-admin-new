@@ -3,6 +3,7 @@
 
   import HolderSide from './holder-side.vue'
   import MultipleMenu from './multiple-menu.vue'
+  import LogoInfo from './logo-info.vue'
 
   const { collapsed, themeMode, menuWidth, menuCollapseWidth } = useSetting()
   const { menus } = useAccount()
@@ -19,6 +20,7 @@
     :trigger="null"
     collapsible
   >
+    <logo-info />
     <multiple-menu :menus="menus"></multiple-menu>
   </a-layout-sider>
 </template>

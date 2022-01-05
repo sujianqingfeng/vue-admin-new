@@ -7,6 +7,7 @@ import styleImport, { AndDesignVueResolve } from 'vite-plugin-style-import'
 
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import { viteMockServe } from 'vite-plugin-mock'
+import WindiCSS from 'vite-plugin-windicss'
 
 import { generateModifyVars } from './build/theme/config'
 
@@ -36,6 +37,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       styleImport({
         resolves: [AndDesignVueResolve()]
       }),
+      WindiCSS(),
 
       viteMockServe({
         mockPath: 'mock',
