@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { setting } from '@/settings'
-import type { Setting } from '@/types/setting'
+import type { Setting } from '@/types/store'
 
 export type SettingState = Setting
 

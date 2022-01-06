@@ -1,10 +1,8 @@
 import { fetchLoginApi, fetchRoutesApi, UserProfile } from '@/apis/user'
 import { useAsyncRoute } from '@/router/hooks/async'
 import { useAccountStore } from '@/store/modules/account'
-import { DataStore } from '@/utils/data-store'
+import { setToken, setUserInfo } from '@/utils/data-store'
 import { useRouter } from 'vue-router'
-
-const TOKEN_KEY = import.meta.env.VITE_TOKEN_KEY
 
 export const useUserLogin = () => {
   const router = useRouter()
@@ -23,8 +21,10 @@ export const useUserLogin = () => {
     loadAsyncRoute()
   }
 
-  const afterLogin = async (userProfile: UserProfile) => {
-    DataStore.set(TOKEN_KEY, userProfile.token)
+  const afterLogin = async ({ token, avatar }: UserProfile) => {
+    setToken(token)
+    setUserInfo({ avatar })
+
     await fetchUserRoutes()
     router.push('/')
   }

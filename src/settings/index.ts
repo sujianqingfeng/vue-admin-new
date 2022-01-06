@@ -1,7 +1,11 @@
-import deepMerge from 'deepmerge'
-import customSetting from './setting'
-import defaultSetting from './default'
+import { Setting } from '@/types/store'
 
 export * from './icon-map'
 
-export const setting = deepMerge(defaultSetting, customSetting)
+export const setting = {
+  asyncRouter: true,
+  collapsed: false,
+  themeMode: 'light',
+  menuWidth: 210,
+  menuCollapseWidth: 50
+} as Setting

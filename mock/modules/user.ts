@@ -13,7 +13,8 @@ export default [
         return {
           code: 200,
           data: {
-            token: 'ffff'
+            token: 'ffff',
+            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
           }
         }
       }

@@ -1,24 +1,20 @@
 import { defineStore } from 'pinia'
-import type { Account, Menu } from '@/types/account'
+import type { Account, Menu } from '@/types/store'
 import { RouteConfig } from '@/types/route'
-import { DataStore, DataStoreType } from '@/utils/data-store'
-
-const ROUTE_KEY = import.meta.env.VITE_ROUTE_KEY
-const TYPE = DataStoreType.JSON
-
-const routeConfigs = (DataStore.get(ROUTE_KEY, TYPE) as RouteConfig[]) || []
+import { getRouteConfigs, getUserInfo, setRouteConfigs } from '@/utils/data-store'
 
 export const useAccountStore = defineStore('account', {
   state: (): Account => {
     return {
-      routeConfigs,
-      menus: []
+      routeConfigs: getRouteConfigs(),
+      menus: [],
+      ...getUserInfo()
     }
   },
   actions: {
     setRouteConfigs(configs: RouteConfig[]) {
       this.routeConfigs = configs
-      DataStore.set(ROUTE_KEY, configs, TYPE)
+      setRouteConfigs(configs)
     },
     setMenus(menus: Menu[]) {
       this.menus = menus
