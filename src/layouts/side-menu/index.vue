@@ -1,12 +1,14 @@
 <script setup lang="ts">
-  import { useAccount, useSetting } from '@/hooks'
+  import { storeToRefs } from 'pinia'
 
   import HolderSide from './holder-side.vue'
   import MultipleMenu from './multiple-menu.vue'
   import LogoInfo from './logo-info.vue'
+  import { useSettingStore } from '@/store/modules/setting'
+  import { useAccountStore } from '@/store/modules/account'
 
-  const { collapsed, themeMode, menuWidth, menuCollapseWidth } = useSetting()
-  const { menus } = useAccount()
+  const { collapsed, themeMode, menuWidth, menuCollapseWidth } = storeToRefs(useSettingStore())
+  const { menus } = storeToRefs(useAccountStore())
 </script>
 
 <template>

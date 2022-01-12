@@ -1,19 +1,23 @@
+import { unref } from 'vue'
 import { Router } from 'vue-router'
-import { useSetting } from '@/hooks'
+import { storeToRefs } from 'pinia'
+
 import { useAccountStore } from '@/store/modules/account'
 import { info } from '@/utils/log'
 import { addRoutes, parseRoute, parseRoutesToMenu } from '../utils'
 
 import { localAsyncRouteConfigs } from '../async/config.async'
 import { deepMerge } from '@/utils/share'
+import { useSettingStore } from '@/store/modules/setting'
 
 export const useAsyncRoute = (router: Router) => {
-  const { asyncRouter } = useSetting()
+  const { asyncRouter } = storeToRefs(useSettingStore())
+
   const accountStore = useAccountStore()
 
   const loadAsyncRoute = () => {
     // 异步路由模式
-    if (asyncRouter.value) {
+    if (unref(asyncRouter)) {
       const routeConfigs = deepMerge(localAsyncRouteConfigs, accountStore.routeConfigs)
 
       const asyncRoutes = parseRoute(routeConfigs)

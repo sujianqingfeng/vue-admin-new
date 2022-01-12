@@ -37,7 +37,7 @@ export class DataStore {
 // 路由配置
 const ROUTE_KEY = import.meta.env.VITE_ROUTE_KEY
 export const getRouteConfigs = () => (DataStore.get(ROUTE_KEY, DataStoreType.JSON) as RouteConfig[]) || []
-export const setRouteConfigs = (configs: RouteConfig[]) => DataStore.set(ROUTE_KEY, configs, DataStoreType.JSONj)
+export const setRouteConfigs = (configs: RouteConfig[]) => DataStore.set(ROUTE_KEY, configs, DataStoreType.JSON)
 
 // 用户信息
 const USER_KEY = import.meta.env.VITE_USER_KEY

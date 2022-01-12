@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-  import { useSetting } from '@/hooks'
+  import { storeToRefs } from 'pinia'
   import { computed, CSSProperties, unref } from 'vue'
+  import { useSettingStore } from '@/store/modules/setting'
 
-  const { realMenuWidth } = useSetting()
+  const { realMenuWidth } = storeToRefs(useSettingStore())
 
   const style = computed((): CSSProperties => {
     const width = unref(realMenuWidth) + 'px'

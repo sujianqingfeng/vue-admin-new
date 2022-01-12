@@ -10,9 +10,18 @@ export const useSettingStore = defineStore('setting', {
       ...setting
     }
   },
+  getters: {
+    realMenuWidth(state) {
+      return state.collapsed ? state.menuCollapseWidth : state.menuWidth
+    }
+  },
+
   actions: {
     setCollapsed(collapsed: boolean) {
       this.collapsed = collapsed
+    },
+    toggleCollapsed() {
+      this.collapsed = !this.collapsed
     }
   }
 })

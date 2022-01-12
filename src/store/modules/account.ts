@@ -1,14 +1,14 @@
 import { defineStore } from 'pinia'
-import type { Account, Menu } from '@/types/store'
+import type { Account, Menu, User } from '@/types/store'
 import { RouteConfig } from '@/types/route'
-import { getRouteConfigs, getUserInfo, setRouteConfigs } from '@/utils/data-store'
+import { getRouteConfigs, getUserInfo, setUserInfo, setRouteConfigs } from '@/utils/data-store'
 
 export const useAccountStore = defineStore('account', {
   state: (): Account => {
     return {
       routeConfigs: getRouteConfigs(),
       menus: [],
-      ...getUserInfo()
+      user: getUserInfo()
     }
   },
   actions: {
@@ -18,6 +18,10 @@ export const useAccountStore = defineStore('account', {
     },
     setMenus(menus: Menu[]) {
       this.menus = menus
+    },
+    setUserInfo(user: User) {
+      this.user = user
+      setUserInfo(user)
     }
   }
 })

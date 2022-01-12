@@ -1,13 +1,13 @@
 import { fetchLoginApi, fetchRoutesApi, UserProfile } from '@/apis/user'
 import { useAsyncRoute } from '@/router/hooks/async'
 import { useAccountStore } from '@/store/modules/account'
-import { setToken, setUserInfo } from '@/utils/data-store'
+import { setToken } from '@/utils/data-store'
 import { useRouter } from 'vue-router'
 
 export const useUserLogin = () => {
   const router = useRouter()
 
-  const { setRouteConfigs } = useAccountStore()
+  const { setRouteConfigs, setUserInfo } = useAccountStore()
   const { loadAsyncRoute } = useAsyncRoute(router)
 
   const fetchUserLogin = async (info: object) => {

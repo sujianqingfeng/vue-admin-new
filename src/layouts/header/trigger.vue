@@ -1,9 +1,13 @@
 <script setup lang="ts">
-  import { useSetting } from '@/hooks'
-  import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
   import Ripple from '@/components/ripple/index.vue'
+  import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
+  import { useSettingStore } from '@/store/modules/setting'
+  import { storeToRefs } from 'pinia'
 
-  const { collapsed, toggleCollapsed } = useSetting()
+  const settingStore = useSettingStore()
+  const { toggleCollapsed } = settingStore
+
+  const { collapsed } = storeToRefs(settingStore)
 </script>
 
 <template>

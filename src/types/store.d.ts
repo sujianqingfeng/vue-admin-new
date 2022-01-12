@@ -11,7 +11,8 @@ export type Setting = {
 export type Account = {
   routeConfigs: RouteConfig[]
   menus: Menu[]
-} & User
+  user?: User
+}
 
 export type User = {
   avatar: string
