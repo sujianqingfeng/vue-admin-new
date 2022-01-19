@@ -26,5 +26,12 @@ export const routeMap: RouteMap = {
     meta: {
       title: '上传'
     }
+  },
+  rich: {
+    path: '/rich',
+    component: () => import('@/pages/rich/index.vue'),
+    meta: {
+      title: '富文本'
+    }
   }
 }

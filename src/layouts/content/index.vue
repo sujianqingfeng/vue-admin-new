@@ -8,7 +8,7 @@
 </script>
 
 <template>
-  <a-layout-content class="layout-content">
+  <a-layout-content class="layout-content m-4">
     <router-view v-slot="{ Component }">
       <keep-alive :include="caches">
         <component :is="Component"></component>

@@ -6,6 +6,9 @@ export const localAsyncRouteConfigs: RouteConfig[] = [
     children: [
       {
         name: 'upload'
+      },
+      {
+        name: 'rich'
       }
     ]
   }
