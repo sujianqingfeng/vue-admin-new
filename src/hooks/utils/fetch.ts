@@ -1,7 +1,7 @@
 import { reactive, ref, unref } from 'vue'
 
 type IFetchOption = {
-  api: (params: any) => Promise<any>
+  apiFn: (params: any) => Promise<any>
   auto?: boolean
   params?: any
   format?: (res: any) => any
@@ -9,7 +9,7 @@ type IFetchOption = {
   defaultValue?: any
 }
 
-export const useFetch = ({ api, params, auto = true, format, onSuccess, defaultValue = {} }: IFetchOption) => {
+export const useFetch = ({ apiFn, params, auto = true, format, onSuccess, defaultValue = {} }: IFetchOption) => {
   const loading = ref(false)
   const result = ref(defaultValue)
 
@@ -17,7 +17,7 @@ export const useFetch = ({ api, params, auto = true, format, onSuccess, defaultV
     loading.value = true
 
     try {
-      const res = await api(params)
+      const res = await apiFn(params)
       result.value = format ? format(res) : res
       loading.value = false
       const data = unref(result)

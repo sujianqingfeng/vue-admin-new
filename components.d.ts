@@ -6,6 +6,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AAvatar: typeof import('ant-design-vue/es')['Avatar']
     ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
+    AButton: typeof import('ant-design-vue/es')['Button']
     AConfigProvider: typeof import('ant-design-vue/es')['ConfigProvider']
     ADropdown: typeof import('ant-design-vue/es')['Dropdown']
     ALayout: typeof import('ant-design-vue/es')['Layout']
@@ -17,10 +18,12 @@ declare module 'vue' {
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
     ATabPane: typeof import('ant-design-vue/es')['TabPane']
     ATabs: typeof import('ant-design-vue/es')['Tabs']
+    AUpload: typeof import('ant-design-vue/es')['Upload']
     Center: typeof import('./src/components/center/index.vue')['default']
     Modal: typeof import('./src/components/modal/modal.vue')['default']
     Rich: typeof import('./src/components/rich/index.vue')['default']
     Ripple: typeof import('./src/components/ripple/index.vue')['default']
+    UploadFile: typeof import('./src/components/upload/upload-file.vue')['default']
   }
 }
 
