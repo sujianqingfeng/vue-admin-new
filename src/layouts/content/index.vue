@@ -1,10 +1,8 @@
 <script lang="ts" setup>
   import { useTabStore } from '@/store/modules/tab'
-  import { computed } from 'vue'
+  import { storeToRefs } from 'pinia'
 
-  const tabStore = useTabStore()
-
-  const caches = computed(() => tabStore.caches)
+  const { caches } = storeToRefs(useTabStore())
 </script>
 
 <template>

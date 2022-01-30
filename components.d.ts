@@ -18,7 +18,7 @@ declare module 'vue' {
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
     ATabPane: typeof import('ant-design-vue/es')['TabPane']
     ATabs: typeof import('ant-design-vue/es')['Tabs']
-    AUpload: typeof import('ant-design-vue/es')['Upload']
+    AUploadDragger: typeof import('ant-design-vue/es')['UploadDragger']
     Center: typeof import('./src/components/center/index.vue')['default']
     Modal: typeof import('./src/components/modal/modal.vue')['default']
     Rich: typeof import('./src/components/rich/index.vue')['default']

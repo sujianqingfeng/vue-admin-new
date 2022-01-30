@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosResponse, AxiosRequestConfig } from 'axios'
 import { notification } from 'ant-design-vue'
 
 type BaseResponse<T = unknown> = {
@@ -33,11 +33,11 @@ axiosInstance.interceptors.response.use((res: AxiosResponse<BaseResponse>) => {
 })
 
 export const request = {
-  get<R = any, T = any>(url: string, params?: object) {
-    return axiosInstance.get<T, R>(url, { params })
+  get<R = any, T = any>(url: string, params?: object, config?: AxiosRequestConfig) {
+    return axiosInstance.get<T, R>(url, { params, ...config })
   },
-  post<R = any, T = any>(url: string, data: object) {
-    return axiosInstance.post<T, R>(url, data)
+  post<R = any, T = any>(url: string, data: object, config?: AxiosRequestConfig) {
+    return axiosInstance.post<T, R>(url, data, config)
   },
   postText(url: string, text: string) {
     return axiosInstance.post(url, text, {

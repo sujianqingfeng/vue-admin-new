@@ -1,9 +1,13 @@
 <script lang="ts" setup>
-  import Upload from '@/components/upload/upload-file.vue'
+  import UploadFile from '@/components/upload/upload-file.vue'
+  import { ref } from 'vue'
+
+  const files = ref([])
 </script>
 
 <template>
-  <upload name="file" :multiple="true" action="https://www.mocky.io/v2/5cc8019d300000980a055e76">
-    <a-button> Click to Upload </a-button>
-  </upload>
+  vModel : {{ files }}
+  <div class="w-100">
+    <upload-file v-model="files"> ffff </upload-file>
+  </div>
 </template>
