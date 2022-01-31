@@ -8,7 +8,7 @@
 
   export type IUploadProps = {
     maxSize?: number
-    modelValue?: any[]
+    modelValue?: any
   }
   export type IUploadEmits = {
     (event: 'update:modelValue', successList: UploadFile[]): void
@@ -22,10 +22,12 @@
 
 <template>
   <a-upload-dragger v-model:fileList="fileList" :custom-request="customRequest" @change="handleChange">
-    <p class="ant-upload-drag-icon">
-      <inbox-outlined></inbox-outlined>
-    </p>
-    <p class="ant-upload-text">Click or drag file to this area to upload</p>
-    <p class="ant-upload-hint">Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</p>
+    <slot>
+      <p class="ant-upload-drag-icon">
+        <inbox-outlined></inbox-outlined>
+      </p>
+      <p class="ant-upload-text">Click or drag file to this area to upload</p>
+      <p class="ant-upload-hint">Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</p>
+    </slot>
   </a-upload-dragger>
 </template>

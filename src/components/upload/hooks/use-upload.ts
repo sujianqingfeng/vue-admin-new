@@ -1,6 +1,7 @@
 import { useMessage } from '@/hooks/components'
+import { generateUUID } from '@/utils/share'
 import { uploadFile } from '@/utils/upload'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 // 这里是复制出来的类型  antd 没有导出这个类型
 export type UploadFileStatus = 'error' | 'success' | 'done' | 'uploading' | 'removed'
@@ -31,20 +32,45 @@ type UploadChangeParam = {
 
 export type IUploadProps = {
   maxSize: number
-  modelValue?: any[] 
+  modelValue?: any
 }
 export type IUploadEmits = {
   (event: 'update:modelValue', successList: UploadFile[]): void
 }
 
 export const useUpload = (props: IUploadProps, emit: IUploadEmits) => {
-  // const props = defineProps<UploadProps>()
-  // withDefaults(props, { maxSize: 8 })
+  const getDefaultList = (val: any) => {
+    // const isUploadComponent = (uid: string) => uid.match('/vc-upload/')
+
+    // 这里根据后端返回的不同情况来处理  有些返回是字符串 有些是返回的是对象
+
+    // 如果是string 当作文件的url来处理
+    if (typeof val === 'string') {
+      const uid = generateUUID()
+      return [{ url: val, uid, name: uid, status: 'done' }] as UploadFile[]
+    }
+
+    if (typeof val === 'object') {
+      if (Array.isArray(val)) {
+        return val.map((item) => {
+          // 通过判断uid 来判断已经处理过的数据
+          if (item.uid) {
+            return item as UploadFile
+          }
+
+          // else other 这里要针对不同内容来处理
+          // .... 这里直接写死
+          return item as UploadFile
+        })
+      }
+    }
+
+    return []
+  }
 
   const message = useMessage()
-  const fileList = ref<UploadFile[]>([])
-
-  const { maxSize } = props
+  const { maxSize, modelValue } = props
+  const fileList = ref<UploadFile[]>(getDefaultList(modelValue))
 
   const customRequest = (options: any) => {
     // console.log('custom request options', options)
@@ -86,6 +112,13 @@ export const useUpload = (props: IUploadProps, emit: IUploadEmits) => {
       emit('update:modelValue', successList)
     }
   }
+
+  watch(
+    () => props.modelValue,
+    (val: any) => {
+      fileList.value = getDefaultList(val)
+    }
+  )
 
   return { beforeUpload, handleChange, fileList, customRequest }
 }
