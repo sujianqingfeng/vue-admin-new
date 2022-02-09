@@ -2,33 +2,9 @@ import { useMessage } from '@/hooks/components'
 import { generateUUID } from '@/utils/share'
 import { uploadFile } from '@/utils/upload'
 import { ref, watch } from 'vue'
+import type { UploadChangeParam, UploadFile } from 'ant-design-vue/lib/upload/interface'
 
-// 这里是复制出来的类型  antd 没有导出这个类型
-export type UploadFileStatus = 'error' | 'success' | 'done' | 'uploading' | 'removed'
-export interface UploadFile<T = any> {
-  uid: string
-  size: number
-  name: string
-  fileName?: string
-  lastModified?: number
-  lastModifiedDate?: Date
-  url?: string
-  status?: UploadFileStatus
-  percent?: number
-  thumbUrl?: string
-  originFileObj?: any
-  response?: T
-  error?: any
-  linkProps?: any
-  type?: string
-  xhr?: T
-  preview?: string
-}
-
-type UploadChangeParam = {
-  file: UploadFile
-  fileList: UploadFile[]
-}
+export { UploadFile }
 
 export type IUploadProps = {
   maxSize: number
@@ -94,7 +70,7 @@ export const useUpload = (props: IUploadProps, emit: IUploadEmits) => {
       })
   }
 
-  const beforeUpload = (file: UploadFile, list: UploadFile[]) => {
+  const beforeUpload = (file: Required<UploadFile>, list: UploadFile[]) => {
     const fileSize = file.size / 1024 / 1024
     if (fileSize > maxSize) {
       const msg = `图片不能超过${maxSize}M`

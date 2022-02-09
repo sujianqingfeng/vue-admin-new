@@ -3,7 +3,7 @@ import path from 'path'
 import vue from '@vitejs/plugin-vue'
 import eslint from 'vite-plugin-eslint'
 import Components from 'unplugin-vue-components/vite'
-import styleImport, { AndDesignVueResolve } from 'vite-plugin-style-import'
+import { createStyleImportPlugin, AndDesignVueResolve } from 'vite-plugin-style-import'
 
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import { viteMockServe } from 'vite-plugin-mock'
@@ -26,6 +26,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       vue(),
       // cache 最好关闭 踩了坑
       eslint({ cache: false }),
+
       Components({
         dts: true,
         resolvers: [
@@ -34,9 +35,11 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
           })
         ]
       }),
-      styleImport({
+
+      createStyleImportPlugin({
         resolves: [AndDesignVueResolve()]
       }),
+
       WindiCSS(),
 
       viteMockServe({
