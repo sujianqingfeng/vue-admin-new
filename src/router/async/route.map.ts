@@ -33,5 +33,12 @@ export const routeMap: RouteMap = {
     meta: {
       title: '富文本'
     }
+  },
+  modal: {
+    path: '/modal',
+    component: () => import('@/pages/modal/index.vue'),
+    meta: {
+      title: '模态框'
+    }
   }
 }

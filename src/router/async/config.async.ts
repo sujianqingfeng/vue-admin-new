@@ -9,6 +9,9 @@ export const localAsyncRouteConfigs: RouteConfig[] = [
       },
       {
         name: 'rich'
+      },
+      {
+        name: 'modal'
       }
     ]
   }
