@@ -2,7 +2,7 @@
   import { withDefaults, defineProps, defineEmits } from 'vue'
   import { Upload } from 'ant-design-vue'
   import { PlusOutlined } from '@ant-design/icons-vue'
-  import { useUpload, UploadFile } from './hooks/use-upload'
+  import { useUpload, UploadFile } from '../hooks/use-upload'
 
   type IUploadProps = {
     modelValue?: any

@@ -5,7 +5,7 @@
 
   // TODO 现在vue还没有支持这个特性 现在是有问题的
   // import type { IUploadProps, IUploadEmits } from './hooks/use-upload'
-  import { useUpload, UploadFile } from './hooks/use-upload'
+  import { useUpload, UploadFile } from '../hooks/use-upload'
 
   type IUploadProps = {
     maxSize?: number

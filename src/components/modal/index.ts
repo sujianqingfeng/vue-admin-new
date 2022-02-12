@@ -1,9 +1,9 @@
 import Modal from './modal.vue'
 
-type IModalInstance = {
+export type IModalInstance = {
   show: () => void
   hide: () => void
   showLoading: () => void
 }
 
-export { Modal, IModalInstance }
+export { Modal }

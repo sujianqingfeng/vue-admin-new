@@ -1,4 +1,4 @@
-import UploadFile from './upload-file.vue'
-import UploadImage from './upload-image.vue'
+import UploadFile from './upload-file/index.vue'
+import UploadImage from './upload-image/index.vue'
 
 export { UploadFile, UploadImage }

@@ -1,13 +1,13 @@
 <script lang="ts" setup>
   import { ref, defineExpose, defineProps, withDefaults, defineEmits, useAttrs } from 'vue'
   import { Modal } from 'ant-design-vue'
-  import { IModalInstance } from './index'
+  import type { IModalInstance } from '.'
 
   const attrs = useAttrs()
   const visible = ref(false)
   const confirmLoading = ref(false)
 
-  const props = withDefaults(defineProps<{ autoCancel: boolean }>(), { autoCancel: true })
+  const props = withDefaults(defineProps<{ autoCancel?: boolean }>(), { autoCancel: true })
   const emit = defineEmits<{ (event: 'ok'): void; (event: 'cancel'): void }>()
 
   const showLoading = () => (confirmLoading.value = true)

@@ -6,14 +6,8 @@ declare module 'vue' {
   export interface GlobalComponents {
     AAvatar: typeof import('ant-design-vue/es')['Avatar']
     ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
-    AButton: typeof import('ant-design-vue/es')['Button']
-    ACol: typeof import('ant-design-vue/es')['Col']
     AConfigProvider: typeof import('ant-design-vue/es')['ConfigProvider']
     ADropdown: typeof import('ant-design-vue/es')['Dropdown']
-    AForm: typeof import('ant-design-vue/es')['Form']
-    AFormItem: typeof import('ant-design-vue/es')['FormItem']
-    AInput: typeof import('ant-design-vue/es')['Input']
-    AInputPassword: typeof import('ant-design-vue/es')['InputPassword']
     ALayout: typeof import('ant-design-vue/es')['Layout']
     ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent']
     ALayoutFooter: typeof import('ant-design-vue/es')['LayoutFooter']
@@ -21,15 +15,15 @@ declare module 'vue' {
     ALayoutSider: typeof import('ant-design-vue/es')['LayoutSider']
     AMenu: typeof import('ant-design-vue/es')['Menu']
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
-    ARow: typeof import('ant-design-vue/es')['Row']
     ATabPane: typeof import('ant-design-vue/es')['TabPane']
     ATabs: typeof import('ant-design-vue/es')['Tabs']
     Center: typeof import('./src/components/center/index.vue')['default']
+    CropperModal: typeof import('./src/components/upload/upload-image/cropper-modal/index.vue')['default']
     Modal: typeof import('./src/components/modal/modal.vue')['default']
     Rich: typeof import('./src/components/rich/index.vue')['default']
     Ripple: typeof import('./src/components/ripple/index.vue')['default']
-    UploadFile: typeof import('./src/components/upload/upload-file.vue')['default']
-    UploadImage: typeof import('./src/components/upload/upload-image.vue')['default']
+    UploadFile: typeof import('./src/components/upload/upload-file/index.vue')['default']
+    UploadImage: typeof import('./src/components/upload/upload-image/index.vue')['default']
   }
 }
 
