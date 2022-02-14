@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-  import { withDefaults, defineProps, defineEmits } from 'vue'
+  import { withDefaults, defineProps, defineEmits, ref } from 'vue'
   import { Upload } from 'ant-design-vue'
+  import { CropperModal, ICropperModalInstance } from './cropper-modal'
   import { PlusOutlined } from '@ant-design/icons-vue'
   import { useUpload, UploadFile } from '../hooks/use-upload'
 
@@ -19,6 +20,8 @@
   const props = withDefaults(defineProps<IUploadProps>(), { modelValue: () => [], maxSize: 8, isCrop: false, count: 8, aspectRatio: 1 })
   const emit = defineEmits<IUploadEmits>()
 
+  const cropperModalRef = ref<ICropperModalInstance>()
+
   const { fileList, handleChange, customRequest, beforeUpload: basicBeforeUpload } = useUpload(props, emit)
 
   const beforeUpload = (file: Required<UploadFile>, fileList: UploadFile[]) => {
@@ -30,7 +33,12 @@
 
     // 裁剪
     if (props.isCrop) {
-      return false
+      return cropperModalRef.value?.show({
+        file,
+        options: {
+          aspectRatio: props.aspectRatio
+        }
+      })
     }
     return true
   }
@@ -44,5 +52,7 @@
         <div class="ant-upload-text">Upload</div>
       </div>
     </upload>
+
+    <cropper-modal ref="cropperModalRef"></cropper-modal>
   </div>
 </template>

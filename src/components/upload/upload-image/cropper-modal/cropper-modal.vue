@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import { nextTick, ref, defineProps, defineEmits, defineExpose, withDefaults, watch, onUnmounted } from 'vue'
-  import { Row, Col } from 'ant-design-vue'
+  import { Row, Col, RadioGroup, Radio } from 'ant-design-vue'
   import type { UploadFile } from 'ant-design-vue/lib/upload/interface'
   import { Modal, IModalInstance } from '../../../modal'
   import Cropper from 'cropperjs'
@@ -11,6 +11,7 @@
 
   const modalRef = ref<IModalInstance>()
   const imageRef = ref()
+  const previewRef = ref()
   let cropperInstance: Cropper | null = null
   const _aspectRatio = ref(props.aspectRatio)
   let tempFile: UploadFile | null = null
@@ -42,13 +43,15 @@
   }
 
   const show = ({ file, options }: IShowConfig) => {
+    console.log('show', file, options)
+
     return new Promise<UploadFile>((resolve, reject) => {
       resolveCb = resolve
       rejectCb = reject
       modalRef.value?.show()
       nextTick(() => {
         if (!cropperInstance) {
-          const mergeOptions = { ...defaultOptions, ...options }
+          const mergeOptions: Cropper.Options = { ...defaultOptions, ...options, preview: previewRef.value }
           cropperInstance = new Cropper(imageRef.value, mergeOptions)
         }
 
@@ -57,7 +60,7 @@
         }
 
         tempFile = file
-        fileToDataUri(file.originFileObj).then((dataUri) => {
+        fileToDataUri(file as unknown as File).then((dataUri) => {
           cropperInstance?.replace(dataUri)
         })
       })
@@ -110,7 +113,20 @@
           <img ref="imageRef" />
         </div>
       </Col>
-      <Col :span="11"> ffff </Col>
+
+      <Col :span="11">
+        <p>预览</p>
+        <div ref="previewRef"></div>
+        <div class="actions-container">
+          <div class="radio">
+            <RadioGroup v-model:value="_aspectRatio">
+              <Radio :value="1">1:1</Radio>
+              <Radio :value="2">2:1</Radio>
+              <Radio :value="3 / 2">3:2</Radio>
+            </RadioGroup>
+          </div>
+        </div>
+      </Col>
     </Row>
   </Modal>
 </template>

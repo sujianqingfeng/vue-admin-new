@@ -13,5 +13,5 @@
 
   upload-image组件：
 
-  <upload-image />
+  <upload-image is-crop />
 </template>
