@@ -4,6 +4,7 @@
   import type { UploadFile } from 'ant-design-vue/lib/upload/interface'
   import { Modal, IModalInstance } from '../../../modal'
   import Cropper from 'cropperjs'
+  import 'cropperjs/dist/cropper.min.css'
   import { IShowConfig, ICropperModalInstance } from '.'
 
   const props = withDefaults(defineProps<{ aspectRatio?: number }>(), { aspectRatio: 1 })
@@ -116,9 +117,10 @@
 
       <Col :span="11">
         <p>预览</p>
-        <div ref="previewRef"></div>
-        <div class="actions-container">
-          <div class="radio">
+        <div ref="previewRef" class="overflow-hidden w-[150px] h-[150px] border border-[#ebebeb] border-solid"></div>
+        <div class="actions-container mt-4">
+          <div class="radio mt-2">
+            <span>比例：</span>
             <RadioGroup v-model:value="_aspectRatio">
               <Radio :value="1">1:1</Radio>
               <Radio :value="2">2:1</Radio>

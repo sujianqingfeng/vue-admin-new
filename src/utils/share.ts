@@ -40,3 +40,37 @@ export function deepMerge<T extends object>(target: Partial<T>, source: Partial<
 
 export const generateUUID = () =>
   `${1e7 + -1e3 + -4e3 + -8e3 + -1e11}`.replace(/[018]/g, (c: string) => (-c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (-c / 4)))).toString(16))
+
+/**
+ * 给数组中的对象添加属性
+ *
+ * @param attrs
+ * @returns
+ */
+export function propsAddNewAttrs<T = object>(attrs: ((props: T) => object) | object) {
+  if (typeof attrs === 'function') {
+    return (props: T) => ({ ...props, ...attrs(props) })
+  }
+
+  return (props: T) => ({ ...props, ...attrs })
+}
+
+/**
+ * 获取options
+ *
+ * @param label
+ * @param value
+ * @returns
+ */
+export const propsToOptions = (label: string, value: string) => (props: Record<string, any>) => ({
+  label: props[label],
+  value: props[value] || ''
+})
+
+/**
+ * 获取一个值
+ *
+ * @param {*} key
+ * @returns
+ */
+export const propsToOne = (key: string) => (props: Record<string, any>) => props[key]
