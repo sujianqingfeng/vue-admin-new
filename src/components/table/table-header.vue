@@ -42,17 +42,19 @@
 </script>
 
 <template>
-  {{ options }}
   <div class="table-header flex justify-between items-center">
-    <div class="left-action">left</div>
+    <div class="left-action">
+      <slot name="left"></slot>
+    </div>
     <div class="right-action">
+      <slot name="right"></slot>
       <Popover placement="bottomRight" trigger="click">
         <template #title>
           <Checkbox :indeterminate="indeterminate" :checked="checkAll" @change="handleCheckAllChange">全选</Checkbox>
         </template>
 
         <template #content>
-          <CheckboxGroup v-model="checkedList" @change="handleCheckChange">
+          <CheckboxGroup v-model:value="checkedList" @change="handleCheckChange">
             <section v-for="option in options" :key="option.label">
               <Checkbox :value="option.value">{{ option.label }}</Checkbox>
             </section>

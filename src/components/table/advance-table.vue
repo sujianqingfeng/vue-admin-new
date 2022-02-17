@@ -22,7 +22,7 @@
   })
 
   const slots = useSlots()
-  const headerSlots = ['left']
+  const headerSlots = ['left', 'right']
   const tableSlots = Object.keys(slots).filter((slotName) => !headerSlots.includes(slotName))
 
   const attrs = useAttrs()
@@ -32,9 +32,12 @@
 
 <template>
   <div class="advance-table">
-    {{ visibleColumns }}
+    <TableHeader :columns="originalColumns" :column-enable="columnEnable" @toggle="handleToggleVisible">
+      <template v-for="slotName in headerSlots" #[slotName]>
+        <slot :name="slotName" />
+      </template>
+    </TableHeader>
 
-    <TableHeader :columns="originalColumns" :column-enable="columnEnable" @toggle="handleToggleVisible"></TableHeader>
     <Table v-bind="attrs" :columns="visibleColumns" :row-key="rowKey">
       <template v-for="slotName in tableSlots" #[slotName]="params">
         <slot :name="slotName" v-bind="params" />
