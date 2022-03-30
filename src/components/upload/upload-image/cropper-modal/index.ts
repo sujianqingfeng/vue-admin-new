@@ -1,6 +1,6 @@
 import CropperModal from './cropper-modal.vue'
 
-import { UploadFile } from 'ant-design-vue/lib/upload/interface'
+import { FileType, UploadFile } from 'ant-design-vue/lib/upload/interface'
 import Cropper from 'cropperjs'
 
 type IShowConfig = {
@@ -9,7 +9,7 @@ type IShowConfig = {
 }
 
 type ICropperModalInstance = {
-  show(config: IShowConfig): Promise<UploadFile>
+  show(config: IShowConfig): Promise<FileType>
 }
 
 export { CropperModal, IShowConfig, ICropperModalInstance }

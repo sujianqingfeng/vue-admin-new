@@ -7,7 +7,7 @@ type Option = {
   msg?: string
 }
 
-export function usePermissionFn(cb: () => void, { code, values, msg = '没有权限操作' }: Option): () => void {
+export function usePermissionFn(cb: (...arg: any) => void, { code, values, msg = '没有权限操作' }: Option): (..._: any) => void {
   const permissionStore = usePermissionStore()
 
   return (...args) => {

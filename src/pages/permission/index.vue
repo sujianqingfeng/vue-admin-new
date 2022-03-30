@@ -5,7 +5,7 @@
     (e: Event, index: number) => {
       console.log('click', e, index)
     },
-    { key: 'menu' }
+    { code: 'menu' }
   )
 </script>
 

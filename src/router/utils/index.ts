@@ -4,14 +4,13 @@ import type { RouteConfig } from '@/types/route'
 
 import { routeMap } from '../async/route.map'
 import { warn } from '@/utils/log'
-import { Menu } from '@/types/account'
-
+import { Menu } from '@/types/store'
 
 /**
  * 解析路由
- * 
- * @param configs 
- * @returns 
+ *
+ * @param configs
+ * @returns
  */
 export const parseRoute = (configs: RouteConfig[]) => {
   const routes: RouteRecordRaw[] = []
@@ -42,9 +41,9 @@ export const mergeRoute = (router: Router, routes: RouteRecordRaw[]) => {
 
 /**
  * 添加路由
- * 
- * @param router 
- * @param routes 
+ *
+ * @param router
+ * @param routes
  */
 export const addRoutes = (router: Router, routes: RouteRecordRaw[] = []) => {
   routes.forEach((route) => {
@@ -54,9 +53,9 @@ export const addRoutes = (router: Router, routes: RouteRecordRaw[] = []) => {
 
 /**
  * 过滤不可见菜单
- * 
- * @param menus 
- * @returns 
+ *
+ * @param menus
+ * @returns
  */
 function filterVisibleMenu(menus: RouteRecordRaw[]) {
   return menus.filter((item) => !item.meta?.invisible)
@@ -64,9 +63,9 @@ function filterVisibleMenu(menus: RouteRecordRaw[]) {
 
 /**
  * 去掉重复菜单
- * 
- * @param menus 
- * @returns 
+ *
+ * @param menus
+ * @returns
  */
 function filterRepeatMenu(menus: RouteRecordRaw[]) {
   const map = new Map<string, RouteRecordRaw>()
@@ -80,13 +79,12 @@ function filterRepeatMenu(menus: RouteRecordRaw[]) {
   return Array.from(map.values())
 }
 
-
 /**
  * 从路由解析菜单
- * 
- * @param subMenus 
- * @param parentPath 
- * @returns 
+ *
+ * @param subMenus
+ * @param parentPath
+ * @returns
  */
 function parseMenu(subMenus: RouteRecordRaw[], parentPath = '') {
   const uniqueMenus = filterRepeatMenu(subMenus)
@@ -120,9 +118,9 @@ function parseMenu(subMenus: RouteRecordRaw[], parentPath = '') {
 
 /**
  * 从/解析菜单
- * 
- * @param routers 
- * @returns 
+ *
+ * @param routers
+ * @returns
  */
 export const parseRoutesToMenu = (routers: RouteRecord[]) => {
   const root = routers.filter((item) => item.path === '/')

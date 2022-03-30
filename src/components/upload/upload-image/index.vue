@@ -3,7 +3,7 @@
   import { Upload } from 'ant-design-vue'
   import { CropperModal, ICropperModalInstance } from './cropper-modal'
   import { PlusOutlined } from '@ant-design/icons-vue'
-  import { useUpload, UploadFile } from '../hooks/use-upload'
+  import { useUpload, UploadFile, FileType } from '../hooks/use-upload'
 
   type IUploadProps = {
     modelValue?: any
@@ -24,7 +24,7 @@
 
   const { fileList, handleChange, customRequest, beforeUpload: basicBeforeUpload } = useUpload(props, emit)
 
-  const beforeUpload = (file: Required<UploadFile>, fileList: UploadFile[]) => {
+  const beforeUpload = (file: FileType, fileList: FileType[]) => {
     const result = basicBeforeUpload(file, fileList)
     // 返回值只有2种情况 一个是Boolean 一个是Promise 判断为object 就是promise
     if (typeof result === 'object') {
@@ -33,7 +33,7 @@
 
     // 裁剪
     if (props.isCrop) {
-      return cropperModalRef.value?.show({
+      return cropperModalRef.value!.show({
         file,
         options: {
           aspectRatio: props.aspectRatio

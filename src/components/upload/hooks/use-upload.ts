@@ -2,9 +2,11 @@ import { useMessage } from '@/hooks/components'
 import { generateUUID } from '@/utils/share'
 import { uploadFile } from '@/utils/upload'
 import { ref, watch } from 'vue'
-import type { UploadChangeParam, UploadFile } from 'ant-design-vue/lib/upload/interface'
+// 这个等ui组件正式发布，就可以从ant-design-vue中取出来了
+import type { FileType } from 'ant-design-vue/lib/upload/interface'
+import type { UploadChangeParam, UploadFile } from 'ant-design-vue'
 
-export { UploadFile }
+export { UploadFile, FileType }
 
 export type IUploadProps = {
   maxSize: number
@@ -70,7 +72,7 @@ export const useUpload = (props: IUploadProps, emit: IUploadEmits) => {
       })
   }
 
-  const beforeUpload = (file: Required<UploadFile>, list: UploadFile[]) => {
+  const beforeUpload = (file: FileType, list: FileType[]) => {
     const fileSize = file.size / 1024 / 1024
     if (fileSize > maxSize) {
       const msg = `图片不能超过${maxSize}M`

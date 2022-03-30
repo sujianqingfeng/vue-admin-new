@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import type { Menu } from '@/types/account'
+import type { Menu } from '@/types/store'
 import { SubMenu, MenuItem } from 'ant-design-vue'
 import { getIconComponent } from '@/settings'
 

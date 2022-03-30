@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import { defineProps, PropType } from 'vue'
-  import { Menu } from '@/types/account'
+  import { Menu } from '@/types/store'
   import { useRouter } from 'vue-router'
   import { useMenuKeys } from './hooks/useMenuKeys'
   import { useMultipleSubMenu } from './hooks/useMultipleSubMenu'

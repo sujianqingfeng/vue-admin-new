@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import { nextTick, ref, defineProps, defineEmits, defineExpose, withDefaults, watch, onUnmounted } from 'vue'
   import { Row, Col, RadioGroup, Radio } from 'ant-design-vue'
-  import type { UploadFile } from 'ant-design-vue/lib/upload/interface'
+  import type { UploadFile, FileType } from 'ant-design-vue/lib/upload/interface'
   import { Modal, IModalInstance } from '../../../modal'
   import Cropper from 'cropperjs'
   import 'cropperjs/dist/cropper.min.css'
@@ -16,7 +16,7 @@
   let cropperInstance: Cropper | null = null
   const _aspectRatio = ref(props.aspectRatio)
   let tempFile: UploadFile | null = null
-  let resolveCb: ((value: UploadFile) => void) | null = null
+  let resolveCb: ((value: FileType) => void) | null = null
   let rejectCb: ((reject?: any) => void) | null = null
 
   const defaultOptions: Cropper.Options = {
@@ -46,7 +46,7 @@
   const show = ({ file, options }: IShowConfig) => {
     console.log('show', file, options)
 
-    return new Promise<UploadFile>((resolve, reject) => {
+    return new Promise<FileType>((resolve, reject) => {
       resolveCb = resolve
       rejectCb = reject
       modalRef.value?.show()
@@ -84,14 +84,9 @@
     cropperInstance.getCroppedCanvas().toBlob((blob) => {
       if (blob && tempFile) {
         const { type, name, uid } = tempFile
-        const file = new File([blob], name, { type })
+        const newFile = new File([blob], name, { type }) as FileType
+        newFile.uid = uid
 
-        const newFile: UploadFile = {
-          originFileObj: file,
-          uid,
-          name,
-          type
-        }
         emit('confirm', newFile)
         resolveCb && resolveCb(newFile)
         modalRef.value?.hide()
