@@ -4,6 +4,7 @@ import vue from '@vitejs/plugin-vue'
 import eslint from 'vite-plugin-eslint'
 import Components from 'unplugin-vue-components/vite'
 import { createStyleImportPlugin, AndDesignVueResolve } from 'vite-plugin-style-import'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import { viteMockServe } from 'vite-plugin-mock'
@@ -51,13 +52,25 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
           import { setupProdMockServer } from './mock/mock-prod-server';
           setupProdMockServer ();
         `
-      })
+      }),
+      visualizer()
     ],
     css: {
       preprocessorOptions: {
         less: {
           modifyVars: generateModifyVars(),
           javascriptEnabled: true
+        }
+      }
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            cropperjs: ['cropperjs'],
+            'ant-design-vue': ['ant-design-vue'],
+            '@wangeditor+editor': ['@wangeditor/editor']
+          }
         }
       }
     }
